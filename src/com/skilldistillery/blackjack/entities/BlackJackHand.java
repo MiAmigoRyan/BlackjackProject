@@ -1,8 +1,9 @@
 package com.skilldistillery.blackjack.entities;
 
+import java.util.List;
+
 public class BlackJackHand extends Hand {
 
-	@Override
 	public int handValue() {
 		//this is where aces could be considered 11 or 1	
 				int sumOfHand = 0;
@@ -19,5 +20,9 @@ public class BlackJackHand extends Hand {
 	public boolean bust() {
 		return (handValue() > 21);
 
+	}
+	public void addCards(List<Card> hand) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -3,9 +3,10 @@ package com.skilldistillery.blackjack.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player extends Hand {
 	private String name;
-	private List<Card> hand = new ArrayList<>();
+	private List<Card> hand = new ArrayList<>() ;
+	 
 	
 	public Player(String name) {
 		this.name = name;
@@ -16,21 +17,18 @@ public class Player {
 		return name ;
 	}
 
-	
 	public void addCardToHand (Card card) {
 		this.hand.add(card);
 	}
 
-	public List<Card> getHand() {
-		return hand;
-	}
+	public BlackJackHand getHand() {
+	    BlackJackHand blackjackHand = new BlackJackHand();
+	    blackjackHand.addCards(hand);
+	    return blackjackHand;
+	}	
 	
-	public void hit () {
-		
+	public void viewHand(){
+		System.out.println("__________________________" + "\n your hand \n"+ hand + "\n____________________________________");
 	}
-	
-	public void stay() {
-		
-	}
-	
+
 }

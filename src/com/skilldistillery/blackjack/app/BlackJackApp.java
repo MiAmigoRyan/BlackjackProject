@@ -2,7 +2,9 @@ package com.skilldistillery.blackjack.app;
 
 import java.util.Scanner;
 
+import com.skilldistillery.blackjack.entities.BlackJackHand;
 import com.skilldistillery.blackjack.entities.Dealer;
+import com.skilldistillery.blackjack.entities.Hand;
 import com.skilldistillery.blackjack.entities.Player;
 
 public class BlackJackApp {
@@ -21,6 +23,7 @@ public class BlackJackApp {
 		while(valid) {
 		System.out.println("Would you like to play? \n Y to play -or- N to quit");
 		String playGame = sc.next();
+		sc.nextLine();
 			if(playGame.equalsIgnoreCase("Y")||playGame.equalsIgnoreCase("YES")){
 				playBlackJack();
 				break;
@@ -29,34 +32,48 @@ public class BlackJackApp {
 				quit();
 				break;
 			}else {
-				System.out.println("invalid input please enter yes, no, Y , or N. ");
-				break;
+				System.out.println("invalid input please enter yes, no, Y , or N. ");		
 			}
 		}
-
-		
 	}
 	public static void playBlackJack() {
 		
 		System.out.println("What is your name? ");
 		String userName = sc.next();
-	
+		sc.nextLine();
 		Dealer dealer = new Dealer();
 		Player player = new Player(userName);
+		BlackJackHand dealerHand = new BlackJackHand();
+		BlackJackHand playerHand = new BlackJackHand();
+		
 		
 		dealer.dealToPlayer( player );
 		dealer.dealToDealerHand( dealer.dealCard() ) ;
 		
-		System.out.println(player.getHand() + "player hand");
-		System.out.println(dealer.getDealerHand() + "dealer hand");
+		dealer.dealToPlayer( player );
+		dealer.dealToDealerHand( dealer.dealCard() ) ;
+		
+		player.viewHand();
+		dealer.revealTopCard();
+		
+		boolean playerBust = false;
+		boolean playerBlackJack = player.getHand().blackjack();
+		
+		System.out.println("+++++++++++++++++++++++++++++++++++"+
+	                       "         (1) to HIT \n "   +
+						   "	     (2) to STAY   "   +         
+		                   "+++++++++++++++++++++++++++++++++++");
+		int choice = sc.nextInt(); 
+		sc.nextLine();
+		
+		if (choice == 1) {
+			
+		}
 		
 		
+
+		}
 		
-		//deck is created and shuffled in dealer class
-		//dealer deals 
-		
-	
-	}
 	
 	public static void quit() {
 		System.out.println("Thanks, come back again soon!");

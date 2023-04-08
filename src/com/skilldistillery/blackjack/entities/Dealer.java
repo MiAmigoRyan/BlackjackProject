@@ -8,9 +8,9 @@ public class Dealer extends Player {
 	private Deck deck;
 	private List<Card> dealerHand = new ArrayList<>();
 	
-	public List<Card> getDealerHand() {
-		return dealerHand;
-	}
+//	public List<Card> getDealerHand() {
+//		return dealerHand;
+//	}
 
 	public Dealer() {
 		super("Dealer");
@@ -34,11 +34,8 @@ public class Dealer extends Player {
 		dealerHand.add(card);
 	}
 	
-	
-//	public void revealTopCard() {
-//		System.out.println("Dealers Card : ");
-//		
-//	}	
-
+	public void revealTopCard() {
+		System.out.println( "dealer hand\n "+ dealerHand.get(0)+"\n__________________________");
+	}	
 
 }
