@@ -21,6 +21,7 @@ public class Player  {
 	public void viewHand(Player player){
 		System.out.println("___________________________________" 
 						 + "\n"+name+"'s hand"+ "\n"+ hand
+						 + "\n"+ hand.handValue()+ " current hand value"
 						 + "\n___________________________________");
 	}
 	public int viewSumOfHand() {
