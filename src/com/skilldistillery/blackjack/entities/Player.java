@@ -3,10 +3,20 @@ package com.skilldistillery.blackjack.entities;
 import java.util.List;
 
 public class Player {
+	private String name;
+	
+	public Player(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return name ;
+	}
 
 	private List<Card> hand;
 	
-	public void deltCard (Card card) {
+	public void addCardToHand (Card card) {
 		this.hand.add(card);
 	}
 

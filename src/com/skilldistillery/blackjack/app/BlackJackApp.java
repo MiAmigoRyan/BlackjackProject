@@ -1,19 +1,56 @@
 package com.skilldistillery.blackjack.app;
 
+import java.util.Scanner;
+
+import com.skilldistillery.blackjack.entities.Dealer;
+import com.skilldistillery.blackjack.entities.Player;
+
 public class BlackJackApp {
+	private static Scanner sc = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		run();
+		BlackJackApp bJ = new BlackJackApp();
+		bJ.run();
 	}
-	public static String run() {
+
+	public static void run() {
 		
-		String message1 = "you can do it.";
-		System.out.println(message1);
-		return message1;
+		System.out.println("Would you like to play? \n Y to play -or- N to quit");
+		String playGame = sc.next();
+		// change so that entry can be yes, no YES, NO or y n
+		if(playGame.equals("Y")){
+			playBlackJack();
+		}
+		if(playGame.equals("N")) {
+			quit();
+		}
+		
 	}
+	public static void playBlackJack() {
+		
+		System.out.println("What is your name? ");
+		String userName = sc.next();
+	
+		Dealer dealer = new Dealer();
+		Player player = new Player(userName);
+		
+		dealer.dealCard();
+		player.addCardToHand();
+		
+		
+		
+		//deck is created and shuffled in dealer class
+		//dealer deals 
+		
+	
+	}
+	
+	public static void quit() {
+		System.out.println("Thanks, come back again soon!");
+	}
+	// dealer.deals card to player or dealer array list dot notation
 }
-		
-		
+
 //		C O M P L E T E		
 //		User Story #1
 //		Create a class structure that models a deck of cards. 
@@ -30,23 +67,23 @@ public class BlackJackApp {
 //		You should be able to display a shuffled deck to the console.
 //
 //		D E S I G N 
-			// make two classes, one for dealers hand another for players hand
-			// dealer deals a card to the play that the player can see
-			// deal deals themselves a card that the player cannot see
-			// above steps happen again
-			// sum of players hand is shown to player
-			// dealer asks player if they wish to hit or stay
-			// if HIT dealer deals player a card
-				// dealer asks player if they wish to hit or stay
-			// if player chooses STAY dealer follows rules of BJ 
-				// if sum of dealer is less than or equal to 17 hit
-				// if sum of dealer is greater than 17 stay
-			// app announces winner
-				// compare dealer finishing hand and player finishing hand 
-				// bust and blackJack interfaces
-			// ask if the player would like to play again with the same deck
-			// 
-			
+		// make two classes, one for dealers hand another for players hand
+		// dealer deals a card to the play that the player can see
+		// deal deals themselves a card that the player cannot see
+		// above steps happen again
+		// sum of players hand is shown to player
+		// dealer asks player if they wish to hit or stay
+		// if HIT dealer deals player a card
+		// dealer asks player if they wish to hit or stay
+		// if player chooses STAY dealer follows rules of BJ
+		// if sum of dealer is less than or equal to 17 hit
+		// if sum of dealer is greater than 17 stay
+		// app announces winner
+		// compare dealer finishing hand and player finishing hand
+		// bust and blackJack interfaces
+		// ask if the player would like to play again with the same deck
+//
+
 //		User Story #3
 //		Deal two hands of cards - one to a Dealer and another to a Player. 
 //		As a card is dealt from the deck, the card will be placed into the hand of either the dealer
@@ -86,4 +123,3 @@ public class BlackJackApp {
 ////
 ////		Keep going. How about implementing in-game suggestions based on the player's current hand? Maybe a card-counting player?
 ////		
-		

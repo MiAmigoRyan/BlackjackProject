@@ -6,11 +6,9 @@ public class BlackJackHand extends Hand {
 	public int handValue() {
 		//this is where aces could be considered 11 or 1	
 				int sumOfHand = 0;
-
 				for (Card card : cards) {
 					sumOfHand += card.getValue();
 				}
-
 				return sumOfHand;
 
 			}

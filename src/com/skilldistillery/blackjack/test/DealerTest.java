@@ -1,6 +1,5 @@
 package com.skilldistillery.blackjack.test;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -32,11 +31,9 @@ Scanner sc = new Scanner(System.in);
 				System.out.println("you have " + deltCard + "remianing cards "
 						+ deck.cardDeckSize()+ "\n sum of your hand: " + sumOfHand);
 				sumOfHand += deltCard.getValue();
-//				playerHand.add(given);
-//				
+				
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		sc.close();
