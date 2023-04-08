@@ -56,8 +56,13 @@ public class BlackJackApp {
 		player.viewHand();
 		dealer.revealTopCard();
 		
-		boolean playerBust = false;
-		boolean playerBlackJack = player.getHand().blackjack();
+		if( player.getBJHand().blackjack()) {
+			System.out.println("Black Jack!!! You Win!!!");
+		}
+		
+//		boolean playerBust;
+		boolean playerBlackJack = player.getBJHand().blackjack();
+//		boolean dealerBlackJack = dealer.getBJHand().blackjack();
 		
 		System.out.println("+++++++++++++++++++++++++++++++++++"+
 	                       "         (1) to HIT \n "   +
@@ -66,10 +71,18 @@ public class BlackJackApp {
 		int choice = sc.nextInt(); 
 		sc.nextLine();
 		
-		if (choice == 1) {
+		int playerHandValue = player.getBJHand().handValue();
+		while(!player.getBJHand().bust()) {
 			
+			if (choice == 1) {
+				dealer.dealToPlayer(player);
+				player.viewHand();
+				playerHandValue = player.getBJHand().handValue();
+			}
+			if(player.getBJHand().bust()) {
+				System.out.println("You BUST, Dealer Wins");
+			}
 		}
-		
 		
 
 		}

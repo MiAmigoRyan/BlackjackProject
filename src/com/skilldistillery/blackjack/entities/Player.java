@@ -21,7 +21,11 @@ public class Player extends Hand {
 		this.hand.add(card);
 	}
 
-	public BlackJackHand getHand() {
+	public String getHand() {
+		return hand.toString();
+	}
+	
+	public BlackJackHand getBJHand() {
 	    BlackJackHand blackjackHand = new BlackJackHand();
 	    blackjackHand.addCards(hand);
 	    return blackjackHand;
