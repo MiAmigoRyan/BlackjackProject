@@ -7,6 +7,9 @@ public abstract class Hand {
 
 	protected List<Card> cards;
 
+	
+	public abstract int handValue();
+	
 	public Hand() {
 		cards = new ArrayList<>();
 	}
@@ -20,27 +23,6 @@ public abstract class Hand {
 		for (Card card : cards) {
 			System.out.println(card.toString());
 		}
-	}
-
-	public int handValue() {
-//this is where aces could be considered 11 or 1	
-		int sumOfHand = 0;
-
-		for (Card card : cards) {
-			sumOfHand += card.getValue();
-		}
-
-		return sumOfHand;
-
-	}
-
-	public boolean blackjack() {
-		return (handValue() == 21 && cards.size() == 2);
-	}
-
-	public boolean bust() {
-		return (handValue() > 21);
-
 	}
 
 	public void clear() {
