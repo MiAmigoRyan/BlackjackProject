@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Deck {
-	private List<Card> deck;
+	private List<Card> cards;
 	
 	public Deck() {
-		deck = createDeck();
+		cards = createDeck();
 	}
 	
 	public static List<Card> createDeck() {
@@ -22,11 +22,14 @@ public class Deck {
 	}
 	
 	public int cardDeckSize(){		
-		return deck.size();
+		return cards.size();
 	}
 
 	public List<Card> getDeck() {
-		return deck;
+		return cards;
 	}
 	
-}
+	public Card dealCard() {
+		return cards.remove(0);
+	}
+	}

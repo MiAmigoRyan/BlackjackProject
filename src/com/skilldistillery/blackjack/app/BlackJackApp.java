@@ -41,24 +41,28 @@ public class BlackJackApp {
 		sc.nextLine();
 		Dealer dealer = new Dealer();
 		Player player = new Player(userName);
-		BlackJackHand dealerHand = new BlackJackHand();
-		BlackJackHand playerHand = new BlackJackHand();
+	
+		//deals card to player
+		player.addCardToHand(dealer.getDeck().dealCard());
+		//deals card to dealer
+		dealer.addCardToHand(dealer.getDeck().dealCard());
 		
+		player.addCardToHand(dealer.getDeck().dealCard());
+		dealer.addCardToHand(dealer.getDeck().dealCard());
+				
+		player.viewHand( player );
+		dealer.revealTopCard( dealer );
+
+		System.out.println(player.getHand().handValue());
 		
-		dealer.dealToPlayer( player );
-		dealer.dealToDealerHand( dealer.dealCard() ) ;
+		//BlackJackHand playerHandValue = player.getHand();
+
 		
-		dealer.dealToPlayer( player );
-		dealer.dealToDealerHand( dealer.dealCard() ) ;
-		
-		player.viewHand();
-		dealer.revealTopCard();
-		
-		if( playerHand.blackjack()) {
+		if( player.getHand().blackjack()) {
 			System.out.println("Black Jack!!! You Win!!!");
 		}
 		
-		while(!playerHand.bust()) {
+		while(!player.getHand().bust()) {
 			System.out.println("+++++++++++++++++++++++++++++++++++"+
 	                           "\n           (1) to HIT            "+
 						       "\n           (2) to STAY           "+         
@@ -66,20 +70,18 @@ public class BlackJackApp {
 			int choice = sc.nextInt(); 
 			sc.nextLine();
 			
-				int playerHandValue = playerHand.handValue();
-				playerHandValue = playerHand.handValue();
 					
 					if (choice == 1) {
-						dealer.dealToPlayer(player);
-						player.viewHand();
-						dealer.revealTopCard();
+						player.addCardToHand(dealer.getDeck().dealCard());
+						player.viewHand(player);
+						dealer.revealTopCard(dealer);
 
 				
-						if(playerHand.bust()) {
+						if(player.getHand().bust()) {
 							System.out.println("You BUST, Dealer Wins");
 							break;
 						}
-						if(playerHand.blackjack()) {
+						if(player.getHand().blackjack()) {
 							System.out.println("You Win!!!");
 							break;
 						}
@@ -89,7 +91,10 @@ public class BlackJackApp {
 					System.out.println("Stay");
 					//print dealer cards
 					//print sum of dealer hand and player hand
+					player.viewHandAndSum();
+					dealer.viewHandAndSum();
 					//declare winner
+					
 					//ask to play again
 					
 					break;
@@ -99,8 +104,11 @@ public class BlackJackApp {
 		
 
 		}
-		
-	
+//		
+//	public static void Winner() {
+//		
+//	}
+//	
 	public static void quit() {
 		System.out.println("Thanks, come back again soon!");
 	}

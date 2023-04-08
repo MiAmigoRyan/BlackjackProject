@@ -1,8 +1,11 @@
 package com.skilldistillery.blackjack.entities;
 
-public class Player extends Hand {
+public class Player  {
 	private String name;
-	 
+	
+	protected BlackJackHand hand = new BlackJackHand();
+	
+
 	public Player(String name) {
 		this.name = name;
 	}
@@ -11,11 +14,32 @@ public class Player extends Hand {
 	public String toString() {
 		return name ;
 	}
+	public void addCardToHand(Card card) {
+	    hand.addCard(card);
+	}
 
-	public void viewHand(){
-		System.out.println("__________________________" 
-						 + "\n"+name+"'s hand"+ "\n"+ cards
-						 + "\n________________________");
+	public void viewHand(Player player){
+		System.out.println("___________________________________" 
+						 + "\n"+name+"'s hand"+ "\n"+ hand
+						 + "\n___________________________________");
+	}
+	public int viewSumOfHand() {
+		return hand.handValue();
+	}
+	
+	public void viewHandAndSum() {
+		System.out.println("___________________________________" 
+						 + "\n"+name+"'s hand"+ "\n"+ hand
+						 + " Current Hand Value : " + viewSumOfHand() 
+						 +"\n___________________________________");
+	}
+
+	public BlackJackHand getHand() {
+		return hand;
+	}
+
+	public void setHand(BlackJackHand hand) {
+		this.hand = hand;
 	}
 
 }
