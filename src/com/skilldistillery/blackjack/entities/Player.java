@@ -1,9 +1,11 @@
 package com.skilldistillery.blackjack.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
 	private String name;
+	private List<Card> hand = new ArrayList<>();
 	
 	public Player(String name) {
 		this.name = name;
@@ -14,7 +16,6 @@ public class Player {
 		return name ;
 	}
 
-	private List<Card> hand;
 	
 	public void addCardToHand (Card card) {
 		this.hand.add(card);

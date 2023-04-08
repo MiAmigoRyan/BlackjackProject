@@ -15,15 +15,25 @@ public class BlackJackApp {
 
 	public static void run() {
 		
+		// change so that entry can be yes, no YES, NO or y n
+		
+		boolean valid = true;
+		while(valid) {
 		System.out.println("Would you like to play? \n Y to play -or- N to quit");
 		String playGame = sc.next();
-		// change so that entry can be yes, no YES, NO or y n
-		if(playGame.equals("Y")){
-			playBlackJack();
+			if(playGame.equalsIgnoreCase("Y")||playGame.equalsIgnoreCase("YES")){
+				playBlackJack();
+				break;
+			}
+			else if(playGame.equalsIgnoreCase("N")||playGame.equalsIgnoreCase("no")) {
+				quit();
+				break;
+			}else {
+				System.out.println("invalid input please enter yes, no, Y , or N. ");
+				break;
+			}
 		}
-		if(playGame.equals("N")) {
-			quit();
-		}
+
 		
 	}
 	public static void playBlackJack() {
@@ -34,8 +44,11 @@ public class BlackJackApp {
 		Dealer dealer = new Dealer();
 		Player player = new Player(userName);
 		
-		dealer.dealCard();
-		player.addCardToHand();
+		dealer.dealToPlayer( player );
+		dealer.dealToDealerHand( dealer.dealCard() ) ;
+		
+		System.out.println(player.getHand() + "player hand");
+		System.out.println(dealer.getDealerHand() + "dealer hand");
 		
 		
 		

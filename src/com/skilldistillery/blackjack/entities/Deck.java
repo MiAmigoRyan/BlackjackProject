@@ -1,7 +1,6 @@
 package com.skilldistillery.blackjack.entities;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Deck {
@@ -24,16 +23,6 @@ public class Deck {
 	
 	public int cardDeckSize(){		
 		return deck.size();
-	}
-// needs return new deck? - no shuffles each time called?	
-// shuffle method should be in dealer +++
-	public List<Card> shuffle() {
-		Collections.shuffle(deck);
-		return deck;
-	}
-	
-	public Card dealCard() {
-		return deck.remove(0);
 	}
 
 	public List<Card> getDeck() {
