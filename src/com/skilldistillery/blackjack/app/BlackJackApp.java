@@ -58,28 +58,39 @@ public class BlackJackApp {
 			System.out.println("Black Jack!!! You Win!!!");
 		}
 		
-
-			System.out.println("+++++++++++++++++++++++++++++++++++\n"+
-	                           "           (1) to HIT \n "   +
-						       "	    (2) to STAY\n  "   +         
-		                       "+++++++++++++++++++++++++++++++++++");
+		while(!playerHand.bust()) {
+			System.out.println("+++++++++++++++++++++++++++++++++++"+
+	                           "\n           (1) to HIT            "+
+						       "\n           (2) to STAY           "+         
+		                       "\n+++++++++++++++++++++++++++++++++++");
 			int choice = sc.nextInt(); 
 			sc.nextLine();
 			
-			while(!playerHand.bust()) {
 				int playerHandValue = playerHand.handValue();
-					
-				if (choice == 1) {
-				dealer.dealToPlayer(player);
-				player.viewHand();
 				playerHandValue = playerHand.handValue();
-				}
+					
+					if (choice == 1) {
+						dealer.dealToPlayer(player);
+						player.viewHand();
+						dealer.revealTopCard();
+
 				
-				if(playerHand.bust()) {
-				System.out.println("You BUST, Dealer Wins");
+						if(playerHand.bust()) {
+							System.out.println("You BUST, Dealer Wins");
+							break;
+						}
+						if(playerHand.blackjack()) {
+							System.out.println("You Win!!!");
+							break;
+						}
 				}
 				
 				if(choice == 2 ) {
+					System.out.println("Stay");
+					//print dealer cards
+					//print sum of dealer hand and player hand
+					//declare winner
+					//ask to play again
 					
 					break;
 				}
