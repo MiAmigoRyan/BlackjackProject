@@ -5,10 +5,11 @@ import java.util.List;
 
 public class Player extends Hand {
 	private String name;
-	private List<Card> hand = new ArrayList<>() ;
+//	private List<Card> hand  ;
 	 
 	
 	public Player(String name) {
+		//super();
 		this.name = name;
 	}
 
@@ -17,22 +18,14 @@ public class Player extends Hand {
 		return name ;
 	}
 
-	public void addCardToHand (Card card) {
-		this.hand.add(card);
-	}
-
-	public String getHand() {
-		return hand.toString();
-	}
-	
-	public BlackJackHand getBJHand() {
-	    BlackJackHand blackjackHand = new BlackJackHand();
-	    blackjackHand.addCards(hand);
-	    return blackjackHand;
-	}	
+//	public List<Card> addCardToHand (Card card) {
+//		return addCard(hand);
+//	}
 	
 	public void viewHand(){
-		System.out.println("__________________________" + "\n your hand \n"+ hand + "\n____________________________________");
+		System.out.println("__________________________" 
+						 + "\n your hand \n"+ cards
+						 + "\n________________________");
 	}
 
 }

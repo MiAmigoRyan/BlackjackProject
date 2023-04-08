@@ -16,9 +16,7 @@ public class BlackJackApp {
 	}
 
 	public static void run() {
-		
-		// change so that entry can be yes, no YES, NO or y n
-		
+				
 		boolean valid = true;
 		while(valid) {
 		System.out.println("Would you like to play? \n Y to play -or- N to quit");
@@ -56,32 +54,36 @@ public class BlackJackApp {
 		player.viewHand();
 		dealer.revealTopCard();
 		
-		if( player.getBJHand().blackjack()) {
+		if( playerHand.blackjack()) {
 			System.out.println("Black Jack!!! You Win!!!");
 		}
 		
-//		boolean playerBust;
-		boolean playerBlackJack = player.getBJHand().blackjack();
-//		boolean dealerBlackJack = dealer.getBJHand().blackjack();
-		
-		System.out.println("+++++++++++++++++++++++++++++++++++"+
-	                       "         (1) to HIT \n "   +
-						   "	     (2) to STAY   "   +         
-		                   "+++++++++++++++++++++++++++++++++++");
-		int choice = sc.nextInt(); 
-		sc.nextLine();
-		
-		int playerHandValue = player.getBJHand().handValue();
-		while(!player.getBJHand().bust()) {
+
+			System.out.println("+++++++++++++++++++++++++++++++++++\n"+
+	                           "           (1) to HIT \n "   +
+						       "	    (2) to STAY\n  "   +         
+		                       "+++++++++++++++++++++++++++++++++++");
+			int choice = sc.nextInt(); 
+			sc.nextLine();
 			
-			if (choice == 1) {
+			while(!playerHand.bust()) {
+				int playerHandValue = playerHand.handValue();
+					
+				if (choice == 1) {
 				dealer.dealToPlayer(player);
 				player.viewHand();
-				playerHandValue = player.getBJHand().handValue();
-			}
-			if(player.getBJHand().bust()) {
+				playerHandValue = playerHand.handValue();
+				}
+				
+				if(playerHand.bust()) {
 				System.out.println("You BUST, Dealer Wins");
-			}
+				}
+				
+				if(choice == 2 ) {
+					
+					break;
+				}
+			
 		}
 		
 

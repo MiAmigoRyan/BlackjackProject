@@ -16,7 +16,7 @@ public abstract class Hand {
 
 	}
 
-	@Override
+
 	public String toString() {
 		return cards + " & ";
 	}
@@ -27,8 +27,11 @@ public abstract class Hand {
 	}
 
 	public int handValue() {
-		
-		return 0;
+		int sumOfHand = 0;
+		for (Card card : cards) {
+			sumOfHand += card.getValue();
+		}
+		return sumOfHand;
 	}
 
 }
