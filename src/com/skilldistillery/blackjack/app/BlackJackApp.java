@@ -55,9 +55,6 @@ public class BlackJackApp {
 
 		System.out.println(player.getHand().handValue());
 		
-		//BlackJackHand playerHandValue = player.getHand();
-
-		
 		if( player.getHand().blackjack()) {
 			System.out.println("Black Jack!!! You Win!!!");
 		}
@@ -94,12 +91,26 @@ public class BlackJackApp {
 					player.viewHandAndSum();
 					dealer.viewHandAndSum();
 					//declare winner
-					
-					//ask to play again
-					
+					if(player.getHand().handValue() > dealer.getHand().handValue()) {
+						System.out.println("+++++++++++++++++++++++++++++++++++"+
+		                                   "\n+           YOU                   +"+
+							               "\n+           WIN		           +"+         
+			                               "\n+++++++++++++++++++++++++++++++++++");
+					}
+					if(player.getHand().handValue() < dealer.getHand().handValue()) {
+						System.out.println("+++++++++++++++++++++++++++++++++++"+
+                                           "\n+              YOU               +"+
+					                       "\n+             LOOSE              +"+         
+	                                       "\n++++++++++++++++++++++++++++++++++ ");
+					}
+					if(player.getHand().handValue() == dealer.getHand().handValue()) {
+						System.out.println("+++++++++++++++++++++++++++++++++++"+
+                                		   "\n+              TIE              +"+
+			                               "\n+             GAME              +"+         
+                                           "\n++++++++++++++++++++++++++++++++++ ");
+					}	
 					break;
 				}
-			
 		}
 		
 

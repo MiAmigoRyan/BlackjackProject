@@ -33,12 +33,5 @@ public abstract class Hand {
 		this.cards = cards;
 	}
 
-//	public int handValue() {
-//		int sumOfHand = 0;
-//		for (Card card : cards) {
-//			sumOfHand += card.getValue();
-//		}
-//		return sumOfHand;
-//	}
 
 }
