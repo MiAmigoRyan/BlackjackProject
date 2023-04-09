@@ -31,7 +31,7 @@ public class Player  {
 	public void viewHandAndSum() {
 		System.out.println("___________________________________" 
 						 + "\n"+name+"'s hand"+ "\n"+ hand
-						 + " Current Hand Value : " + viewSumOfHand() 
+						 + " "
 						 +"\n___________________________________");
 	}
 

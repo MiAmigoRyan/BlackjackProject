@@ -13,10 +13,25 @@ public class BlackJackApp {
 	public static void main(String[] args) {
 		BlackJackApp bJ = new BlackJackApp();
 		bJ.run();
+
 	}
 
 	public static void run() {
-				
+		//ask if user want's to play
+		gameLoop();
+		//get users name
+		System.out.println("What is your name? ");
+		String userName = sc.next();
+		Player player = new Player(userName);
+		sc.nextLine();
+		//Instantiate dealer
+		Dealer dealer = new Dealer();
+		//lay first cards
+		initalHand(player, dealer);
+		//player plays
+		palyerPlays(player,dealer);
+	}
+	public static void gameLoop() {
 		boolean valid = true;
 		while(valid) {
 		System.out.println("Would you like to play? \n Y to play -or- N to quit");
@@ -34,6 +49,7 @@ public class BlackJackApp {
 			}
 		}
 	}
+//currently not using this method but would like to	
 	public static void playBlackJack() {
 		
 		System.out.println("What is your name? ");
@@ -42,6 +58,10 @@ public class BlackJackApp {
 		Dealer dealer = new Dealer();
 		Player player = new Player(userName);
 	
+		
+	}
+		
+	public static void initalHand(Player player, Dealer dealer) {
 		//deals card to player
 		player.addCardToHand(dealer.getDeck().dealCard());
 		//deals card to dealer
@@ -53,12 +73,14 @@ public class BlackJackApp {
 		player.viewHand( player );
 		dealer.revealTopCard( dealer );
 
-		System.out.println(player.getHand().handValue());
 		
 		if( player.getHand().blackjack()) {
 			System.out.println("Black Jack!!! You Win!!!");
+			
 		}
+	}
 		
+	public static void playerPlays (Player player, Dealer dealer) {	
 		while(!player.getHand().bust()) {
 			System.out.println("+++++++++++++++++++++++++++++++++++"+
 	                           "\n           (1) to HIT            "+
@@ -86,11 +108,9 @@ public class BlackJackApp {
 				
 				if(choice == 2 ) {
 					System.out.println("Stay");
-					//print dealer cards
-					//print sum of dealer hand and player hand
+					
 					player.viewHandAndSum();
-					dealer.viewHandAndSum();
-					//declare winner
+					dealer.viewDealerHand( dealer );
 					if(player.getHand().handValue() > dealer.getHand().handValue()) {
 						System.out.println("+++++++++++++++++++++++++++++++++++"+
 		                                   "\n+           YOU                   +"+
@@ -110,12 +130,30 @@ public class BlackJackApp {
                                            "\n++++++++++++++++++++++++++++++++++ ");
 					}	
 					break;
+
 				}
-		}
+			}
 		
 
 		}
-//		
+	public static void dealerPlay(Dealer dealer) {
+	 int dealerHandValue = 0;
+	 while (dealerHandValue<17) {
+			dealer.addCardToHand(dealer.getDeck().dealCard());
+			dealerHandValue = dealer.getHand().handValue();
+			System.out.println("Dealer Hits :");
+			dealer.viewDealerHand( dealer );	
+	 	}
+	 	if (dealerHandValue > 21 ) {
+	 		System.out.println("Dealaer Busts : ");
+	 				dealer.viewDealerHand( dealer );
+	 	}
+	 	if (dealerHandValue == 21 ) {
+	 		System.out.println("Dealer BlackJack :");  
+	 			dealer.viewDealerHand(dealer);
+	 	}
+		
+	}
 //	public static void Winner() {
 //		
 //	}

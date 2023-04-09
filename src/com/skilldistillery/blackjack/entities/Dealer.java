@@ -21,17 +21,17 @@ public class Dealer extends Player {
 
 	public void dealToPlayer(Player player) {
 	   deck.dealCard();
-//	   player.getHand().addCard(card);
 	}
 	
 	public void revealTopCard(Player player) {
 		System.out.println( "dealer hand\n "+ hand.getCards().get(0)
-				           +"\n__________________________");
+				           +"\n___________________________________");
 	}
 	
 	public void viewDealerHand(Player player){
 		System.out.println("___________________________________" 
 						 + "\nDealers's hand"+ "\n"+ hand.getCards()
+						 +"\n         "+ hand.handValue()
 						 + "\n___________________________________");
 	}
 
