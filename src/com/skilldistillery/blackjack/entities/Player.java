@@ -9,6 +9,10 @@ public class Player  {
 	public Player(String name) {
 		this.name = name;
 	}
+	
+	public void clearHand() {
+		this.hand.clear();
+	}
 
 	@Override
 	public String toString() {

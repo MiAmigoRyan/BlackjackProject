@@ -16,7 +16,16 @@ public enum Rank {
 	}
 	
 
-    public String toString() {
-        return Integer.toString(value);
+//    public String toString() {
+//    	if (value == 11) {
+//    		return "Ace";
+//    	}else if (value == 10) {
+//    		switch(){
+//    		case JACK : return "Jack";
+//    		case QUEEN : return "Queen";
+//    		case KING : return "King";
+//    		}
+//    	}
+//        return Integer.toString(value);
+//    }
     }
-}

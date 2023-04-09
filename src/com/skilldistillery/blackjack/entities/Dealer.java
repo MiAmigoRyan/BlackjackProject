@@ -13,6 +13,9 @@ public class Dealer extends Player {
 		shuffle();
 	}
 
+	public void clearHand() {
+		this.hand.clear();
+	}
 	public List<Card> shuffle() {
 		Collections.shuffle(deck.getDeck());
 		return deck.getDeck();

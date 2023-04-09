@@ -14,7 +14,7 @@ public class BlackJackHand extends Hand{
 					}
 				}
 				for (int aces = 0; aces< numAces; aces++) {
-					if(sumOfHand +11 >= 21) {
+					if(sumOfHand + 11 >= 21) {
 						sumOfHand += 11;
 					}else {
 						sumOfHand +=1;
@@ -25,7 +25,7 @@ public class BlackJackHand extends Hand{
 			}
 
 	public boolean blackjack() {
-		return (handValue() == 21 && cards.size() == 2);
+		return (handValue() == 21);
 	}
 
 

@@ -2,9 +2,7 @@ package com.skilldistillery.blackjack.app;
 
 import java.util.Scanner;
 
-import com.skilldistillery.blackjack.entities.BlackJackHand;
 import com.skilldistillery.blackjack.entities.Dealer;
-import com.skilldistillery.blackjack.entities.Hand;
 import com.skilldistillery.blackjack.entities.Player;
 
 public class BlackJackApp {
@@ -18,24 +16,14 @@ public class BlackJackApp {
 
 	public static void run() {
 		Dealer dealer = playInquisition();
-		//ask if user want's to play
-		//Instantiate dealer
 		Player player = playerName();
-			//get users name
-		
-		
-		//lay first cards
-		initalHand(player, dealer);
-		//player plays
-		playerPlays(player,dealer);
-		//dealer plays
-		dealerPlay(dealer);
-		//announce winner
-		winner(player, dealer);
-	}
+		dealHands(player, dealer);
+		playBlackJack(player,dealer);
+		//winner(player, dealer);
+		}
+	
 	public static Dealer playInquisition() {
 		boolean valid = true;
-		Dealer dealer = new Dealer();	
 		while(valid) {
 		System.out.println("Would you like to play? \n Y to play -or- N to quit");
 		String playGame = sc.next();
@@ -50,6 +38,7 @@ public class BlackJackApp {
 				System.out.println("invalid input please enter yes, no, Y , or N. ");		
 			}
 		}
+		Dealer dealer = new Dealer();	
 		return dealer;
 	}
 	public static Player playerName( ) {
@@ -59,7 +48,9 @@ public class BlackJackApp {
 	Player player = new Player(userName);
 	return player;
 	}
-	public static void initalHand(Player player, Dealer dealer) {
+	public static void dealHands(Player player, Dealer dealer) {
+		// shuffles deck
+		dealer.shuffle();
 		//deals card to player
 		player.addCardToHand(dealer.getDeck().dealCard());
 		//deals card to dealer
@@ -71,14 +62,11 @@ public class BlackJackApp {
 		player.viewHand( player );
 		dealer.revealTopCard( dealer );
 
-		
 		if( player.getHand().blackjack()) {
-			System.out.println("Black Jack!!! You Win!!!");
-			
+			winner(player, dealer);	
 		}
 	}
-		
-	public static void playerPlays (Player player, Dealer dealer) {	
+	public static void playBlackJack (Player player, Dealer dealer) {	
 		while(!player.getHand().bust()) {
 			System.out.println("+++++++++++++++++++++++++++++++++++"+
 	                           "\n           (1) to HIT            "+
@@ -88,100 +76,106 @@ public class BlackJackApp {
 			sc.nextLine();
 			
 					
-					if (choice == 1) {
-						player.addCardToHand(dealer.getDeck().dealCard());
-						player.viewHand(player);
-						dealer.revealTopCard(dealer);
-
-//				
-//						if(player.getHand().bust()) {
-//							System.out.println("You BUST, Dealer Wins");
-//							break;
-//						}
-//						if(player.getHand().blackjack()) {
-//							System.out.println("You Win!!!");
-//							break;
-//						}
+			if (choice == 1) {
+				player.addCardToHand(dealer.getDeck().dealCard());
+				if(player.getHand().bust()) {
+					System.out.println("you busted!");
+					winner(player, dealer);
+					break;
+				}
+				if(player.getHand().blackjack()) {
+					System.out.println("BlackJack!");
+					winner(player, dealer);
+					break;
+				}
+				player.viewHand(player);
+				dealer.revealTopCard(dealer);
 				}
 				
-				if(choice == 2 ) {
+			if(choice == 2 ) {
 					System.out.println("Stay");
-//					
-//					player.viewHandAndSum();
-//					dealer.viewDealerHand( dealer );
-//					if(player.getHand().handValue() > dealer.getHand().handValue()) {
-//						System.out.println("+++++++++++++++++++++++++++++++++++"+
-//		                                   "\n+           YOU                   +"+
-//							               "\n+           WIN		           +"+         
-//			                               "\n+++++++++++++++++++++++++++++++++++");
-//					}
-//					if(player.getHand().handValue() < dealer.getHand().handValue()) {
-//						System.out.println("+++++++++++++++++++++++++++++++++++"+
-//                                           "\n+              YOU               +"+
-//					                       "\n+             LOOSE              +"+         
-//	                                       "\n++++++++++++++++++++++++++++++++++ ");
-//					}
-//					if(player.getHand().handValue() == dealer.getHand().handValue()) {
-//						System.out.println("+++++++++++++++++++++++++++++++++++"+
-//                                		   "\n+              TIE              +"+
-//			                               "\n+             GAME              +"+         
-//                                           "\n++++++++++++++++++++++++++++++++++ ");
-//					}	
+					winner(player, dealer);
 					break;
 
 				}
 			}
-		
 
 		}
 	public static void dealerPlay(Dealer dealer) {
 	 int dealerHandValue = 0;
-	 while (dealerHandValue<17) {
+	 boolean dealerPlay = true;
+	 while (dealerPlay) { 
+		 if (dealerHandValue<17) {
 			dealer.addCardToHand(dealer.getDeck().dealCard());
 			dealerHandValue = dealer.getHand().handValue();
 			System.out.println("Dealer Hits :");
-			dealer.viewDealerHand( dealer );	
+			//dealer.viewDealerHand( dealer );	
+		 	}
+	 
+	 		if (dealerHandValue > 21 ) {
+	 			dealerPlay = false;
+	 			break;
+	 		}
+	 		if (dealerHandValue == 21 ) {
+	 			dealerPlay = false;
+	 			break;
+	 		}
 	 	}
-	 	if (dealerHandValue > 21 ) {
-	 		System.out.println("Dealaer Busts : ");
-	 				dealer.viewDealerHand( dealer );
-	 	}
-	 	if (dealerHandValue == 21 ) {
-	 		System.out.println("Dealer BlackJack :");  
-	 			dealer.viewDealerHand(dealer);
-	 	}
-		
-	}
+	} 
 	public static void winner(Player player, Dealer dealer) {
 	    System.out.println("Final hands :");
-	    player.viewHandAndSum();
-	    dealer.viewDealerHand(dealer);
+	    player.viewHand(player);
+	    dealer.viewHand(dealer);
 
 	    if (player.getHand().blackjack()) {
-	        System.out.println("Blackjack! " + player + " wins!");
+	        System.out.println( player.getName() + " wins!");
+	        playAgain(player, dealer);
+	        
 	    }
-	    if (player.getHand().bust()) {
-	        System.out.println("Bust! Dealer wins!");
-	    }
-	    if (dealer.getHand().bust()) {
-	        System.out.println("Dealer busts! " + player.getName() + " wins!");
-	    }
-	    if (player.getHand().handValue() > dealer.getHand().handValue()) {
-	        System.out.println(player.getName() + " wins!");
-	    }
-	    if (player.getHand().handValue() < dealer.getHand().handValue()) {
+	    else if (player.getHand().bust()) {
 	        System.out.println("Dealer wins!");
+	        playAgain(player, dealer);
+	    }
+	    else if (dealer.getHand().bust()) {
+	        System.out.println("Dealer busts! " + player.getName() + " wins!");
+	        playAgain(player, dealer);
+	    }
+	    else if (player.getHand().handValue() > dealer.getHand().handValue()) {
+	        System.out.println(player.getName() + " wins!");
+	        playAgain(player, dealer);
+	    }
+	    else if (player.getHand().handValue() < dealer.getHand().handValue()) {
+	        System.out.println("Dealer wins!");
+	        playAgain(player, dealer);
 	    }
 	    else {
 	        System.out.println("It's a tie!");
+	        playAgain(player, dealer);
 	    }
 	}
-	
-	
+	public static void playAgain(Player player, Dealer dealer) {
+	    System.out.println("Do you want to play again? \n Y to play again -or- N to quit");
+	    String playAgain = sc.next();
+	    sc.nextLine();
+	    if (playAgain.equalsIgnoreCase("Y") || playAgain.equalsIgnoreCase("YES")) {
+	        player.clearHand();
+	        dealer.clearHand();
+	        dealHands(player, dealer);
+	        playBlackJack(player, dealer);
+	        dealerPlay(dealer);
+	        winner(player, dealer);
+	        playAgain(player, dealer);
+	    } else if (playAgain.equalsIgnoreCase("N") || playAgain.equalsIgnoreCase("NO")) {
+	        quit();
+	    } else {
+	        System.out.println("Invalid input. Please enter yes, no, Y, or N.");
+	        playAgain(player, dealer);
+	    }
+	}
+		
 	public static void quit() {
 		System.out.println("Thanks, come back again soon!");
 	}
-	// dealer.deals card to player or dealer array list dot notation
 }
 
 //		C O M P L E T E		
