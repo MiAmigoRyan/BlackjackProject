@@ -17,28 +17,30 @@ public class BlackJackApp {
 	}
 
 	public static void run() {
+		Dealer dealer = playInquisition();
 		//ask if user want's to play
-		gameLoop();
-		//get users name
-		System.out.println("What is your name? ");
-		String userName = sc.next();
-		Player player = new Player(userName);
-		sc.nextLine();
 		//Instantiate dealer
-		Dealer dealer = new Dealer();
+		Player player = playerName();
+			//get users name
+		
+		
 		//lay first cards
 		initalHand(player, dealer);
 		//player plays
-		palyerPlays(player,dealer);
+		playerPlays(player,dealer);
+		//dealer plays
+		dealerPlay(dealer);
+		//announce winner
+		winner(player, dealer);
 	}
-	public static void gameLoop() {
+	public static Dealer playInquisition() {
 		boolean valid = true;
+		Dealer dealer = new Dealer();	
 		while(valid) {
 		System.out.println("Would you like to play? \n Y to play -or- N to quit");
 		String playGame = sc.next();
 		sc.nextLine();
 			if(playGame.equalsIgnoreCase("Y")||playGame.equalsIgnoreCase("YES")){
-				playBlackJack();
 				break;
 			}
 			else if(playGame.equalsIgnoreCase("N")||playGame.equalsIgnoreCase("no")) {
@@ -48,19 +50,15 @@ public class BlackJackApp {
 				System.out.println("invalid input please enter yes, no, Y , or N. ");		
 			}
 		}
+		return dealer;
 	}
-//currently not using this method but would like to	
-	public static void playBlackJack() {
-		
-		System.out.println("What is your name? ");
-		String userName = sc.next();
-		sc.nextLine();
-		Dealer dealer = new Dealer();
-		Player player = new Player(userName);
-	
-		
+	public static Player playerName( ) {
+	System.out.println("What is your name? ");
+	String userName = sc.next();
+	sc.nextLine();
+	Player player = new Player(userName);
+	return player;
 	}
-		
 	public static void initalHand(Player player, Dealer dealer) {
 		//deals card to player
 		player.addCardToHand(dealer.getDeck().dealCard());
@@ -95,40 +93,40 @@ public class BlackJackApp {
 						player.viewHand(player);
 						dealer.revealTopCard(dealer);
 
-				
-						if(player.getHand().bust()) {
-							System.out.println("You BUST, Dealer Wins");
-							break;
-						}
-						if(player.getHand().blackjack()) {
-							System.out.println("You Win!!!");
-							break;
-						}
+//				
+//						if(player.getHand().bust()) {
+//							System.out.println("You BUST, Dealer Wins");
+//							break;
+//						}
+//						if(player.getHand().blackjack()) {
+//							System.out.println("You Win!!!");
+//							break;
+//						}
 				}
 				
 				if(choice == 2 ) {
 					System.out.println("Stay");
-					
-					player.viewHandAndSum();
-					dealer.viewDealerHand( dealer );
-					if(player.getHand().handValue() > dealer.getHand().handValue()) {
-						System.out.println("+++++++++++++++++++++++++++++++++++"+
-		                                   "\n+           YOU                   +"+
-							               "\n+           WIN		           +"+         
-			                               "\n+++++++++++++++++++++++++++++++++++");
-					}
-					if(player.getHand().handValue() < dealer.getHand().handValue()) {
-						System.out.println("+++++++++++++++++++++++++++++++++++"+
-                                           "\n+              YOU               +"+
-					                       "\n+             LOOSE              +"+         
-	                                       "\n++++++++++++++++++++++++++++++++++ ");
-					}
-					if(player.getHand().handValue() == dealer.getHand().handValue()) {
-						System.out.println("+++++++++++++++++++++++++++++++++++"+
-                                		   "\n+              TIE              +"+
-			                               "\n+             GAME              +"+         
-                                           "\n++++++++++++++++++++++++++++++++++ ");
-					}	
+//					
+//					player.viewHandAndSum();
+//					dealer.viewDealerHand( dealer );
+//					if(player.getHand().handValue() > dealer.getHand().handValue()) {
+//						System.out.println("+++++++++++++++++++++++++++++++++++"+
+//		                                   "\n+           YOU                   +"+
+//							               "\n+           WIN		           +"+         
+//			                               "\n+++++++++++++++++++++++++++++++++++");
+//					}
+//					if(player.getHand().handValue() < dealer.getHand().handValue()) {
+//						System.out.println("+++++++++++++++++++++++++++++++++++"+
+//                                           "\n+              YOU               +"+
+//					                       "\n+             LOOSE              +"+         
+//	                                       "\n++++++++++++++++++++++++++++++++++ ");
+//					}
+//					if(player.getHand().handValue() == dealer.getHand().handValue()) {
+//						System.out.println("+++++++++++++++++++++++++++++++++++"+
+//                                		   "\n+              TIE              +"+
+//			                               "\n+             GAME              +"+         
+//                                           "\n++++++++++++++++++++++++++++++++++ ");
+//					}	
 					break;
 
 				}
@@ -154,10 +152,32 @@ public class BlackJackApp {
 	 	}
 		
 	}
-//	public static void Winner() {
-//		
-//	}
-//	
+	public static void winner(Player player, Dealer dealer) {
+	    System.out.println("Final hands :");
+	    player.viewHandAndSum();
+	    dealer.viewDealerHand(dealer);
+
+	    if (player.getHand().blackjack()) {
+	        System.out.println("Blackjack! " + player + " wins!");
+	    }
+	    if (player.getHand().bust()) {
+	        System.out.println("Bust! Dealer wins!");
+	    }
+	    if (dealer.getHand().bust()) {
+	        System.out.println("Dealer busts! " + player.getName() + " wins!");
+	    }
+	    if (player.getHand().handValue() > dealer.getHand().handValue()) {
+	        System.out.println(player.getName() + " wins!");
+	    }
+	    if (player.getHand().handValue() < dealer.getHand().handValue()) {
+	        System.out.println("Dealer wins!");
+	    }
+	    else {
+	        System.out.println("It's a tie!");
+	    }
+	}
+	
+	
 	public static void quit() {
 		System.out.println("Thanks, come back again soon!");
 	}
