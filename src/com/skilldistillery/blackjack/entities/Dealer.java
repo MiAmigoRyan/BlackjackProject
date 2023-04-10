@@ -27,13 +27,13 @@ public class Dealer extends Player {
 	}
 	
 	public void revealTopCard(Player player) {
-		System.out.println( "dealer hand\n "+ hand.getCards().get(0)
+		System.out.println( "\t\tdealer hand\n "+ hand.getCards().get(0) + " [] "
 				           +"\n___________________________________");
 	}
 	
 	public void viewDealerHand(Player player){
 		System.out.println("___________________________________" 
-						 + "\nDealers's hand"+ "\n"+ hand.getCards()
+						 + "\n\t\tDealers's hand"+ "\n"+ hand.getCards()
 						 +"\n         "+ hand.handValue()
 						 + "\n___________________________________");
 	}

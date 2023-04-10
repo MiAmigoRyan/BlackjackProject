@@ -24,19 +24,13 @@ public class Player  {
 
 	public void viewHand(Player player){
 		System.out.println("___________________________________" 
-						 + "\n"+name+"'s hand"+ "\n"+ hand
-						 + "\n"+ hand.handValue()+ " current hand value"
+						 + "\n\t\t   "+name
+						 + "\n\t\t HAND VALUE:"+ hand.handValue()
+						 + "\n"+ hand
 						 + "\n___________________________________");
 	}
 	public int viewSumOfHand() {
 		return hand.handValue();
-	}
-	
-	public void viewHandAndSum() {
-		System.out.println("___________________________________" 
-						 + "\n"+name+"'s hand"+ "\n"+ hand
-						 + " "
-						 +"\n___________________________________");
 	}
 
 	public BlackJackHand getHand() {

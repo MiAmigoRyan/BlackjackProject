@@ -20,7 +20,7 @@ public Rank getRank() {
 
 @Override
 public String toString() {
-	return rank + " of " + suit ;
+	return rank + "" + suit ;
 }
  
 public int getValue() {

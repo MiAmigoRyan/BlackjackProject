@@ -21,13 +21,11 @@ public class BlackJackHand extends Hand{
 					}
 				}
 				return sumOfHand;
-
 			}
 
 	public boolean blackjack() {
 		return (handValue() == 21);
 	}
-
 
 	public boolean bust() {
 		return (handValue() > 21);
