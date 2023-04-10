@@ -122,8 +122,7 @@ public class BlackJackApp {
 				dealerHandValue = dealer.getHand().handValue();
 				System.out.println("___________________________________"
 						          +"\n D E A L E R  H I T S");
-				dealer.viewHand(dealer);
-				// dealer.viewDealerHand( dealer );
+				dealer.viewHand(dealer);				
 			}
 
 			if (dealerHandValue > 21) {
